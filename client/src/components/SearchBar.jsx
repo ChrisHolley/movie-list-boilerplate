@@ -7,16 +7,23 @@ class SearchBar extends React.Component {
       movieName: ''
     };
     this.changeHandler = this.changeHandler.bind(this);
+    this.submitHandler = this.submitHandler.bind(this);
   }
 
   changeHandler(e) {
-    this.setState({movieName: event.target.value})
-    console.log('seachBar state: ', this.state)
+    this.setState({movieName: e.target.value})
+    this.props.searchUpdater(e.target.value)
+    // console.log('searchBar state: ', this.state)
+  }
+
+  submitHandler(e) {
+    e.preventDefault();
+    // console.log('this should submit=', this.state.movieName)
   }
 
   render() {
     return (
-      <form>
+      <form onSubmit={this.submitHandler}>
         <input
           type="text"
           value={this.state.movieName}

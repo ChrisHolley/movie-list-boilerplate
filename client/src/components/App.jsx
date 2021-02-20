@@ -14,20 +14,67 @@ var movies = [
   },
   {
     title: 'Ex Machina',
+  },
+  {
+    title: 'M'
   }
 ];
 
-const App = (props) => (
-  <div>
-    <SearchBar />
-    <ul>
-    {movies.map((movie, idx) => (
-        <li key={idx}>
-          <Movie movie={movie}/>
-        </li>
-    ))}
-    </ul>
-  </div>
-);
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      movies: []
+    }
+    this.searchUpdater = this.searchUpdater.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({ movies })
+  }
+
+  searchUpdater(searchBarValue) {
+    // console.log('searchUpdater:',searchBarValue, 'length', searchBarValue.length)
+
+    if (searchBarValue.length === 0) {
+      // console.log('null search if is running')
+      this.setState( {movies} )
+    } else  {
+      this.setState(
+        {
+          movies: movies.filter((movie) => {
+            // console.log(movies);
+            // console.log(movie.title, 'vs', searchBarValue)
+            if (movie.title === searchBarValue) {
+              return movie.title;
+            }
+          })
+        }
+      );
+
+    }
+  }
+
+  filterFunc(filterValue) {
+    //set state to equal output of the filter
+
+  }
+
+  render() {
+    return (
+      <div>
+        <SearchBar searchUpdater={this.searchUpdater}/>
+        <ul>
+          {/* {console.log('this state:', this.state.movies)} */}
+          {this.state.movies.map((movie, idx) => (
+            <li key={idx}>
+              <Movie movie={movie} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}
 
 export default App;
