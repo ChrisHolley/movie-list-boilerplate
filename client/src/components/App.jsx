@@ -1,30 +1,28 @@
 import React from 'react';
 import Movie from './Movie.jsx';
+import SearchBar from './SearchBar.jsx';
 
 var movies = [
   {
     title: 'Mean Girls',
-    id: 1
   },
   {
     title: 'Hackers',
-    id: 1
   },
   {
     title: 'Sunshine',
-    id: 1
   },
   {
     title: 'Ex Machina',
-    id: 1
   }
 ];
 
 const App = (props) => (
   <div>
+    <SearchBar />
     <ul>
     {movies.map((movie, idx) => (
-        <li>
+        <li key={idx}>
           <Movie movie={movie}/>
         </li>
     ))}
