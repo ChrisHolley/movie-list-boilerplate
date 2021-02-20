@@ -1,21 +1,32 @@
 import React from 'react';
+import Movie from './Movie.jsx';
 
 var movies = [
-  {title: 'Mean Girls'},
-  {title: 'Hackers'},
-  {title: 'The Grey'},
-  {title: 'Sunshine'},
-  {title: 'Ex Machina'},
+  {
+    title: 'Mean Girls',
+    id: 1
+  },
+  {
+    title: 'Hackers',
+    id: 1
+  },
+  {
+    title: 'Sunshine',
+    id: 1
+  },
+  {
+    title: 'Ex Machina',
+    id: 1
+  }
 ];
 
 const App = (props) => (
   <div>
     <ul>
-    {movies[0].title}
     {movies.map((movie, idx) => (
-      <li>
-        {movie.title}
-      </li>
+        <li>
+          <Movie movie={movie}/>
+        </li>
     ))}
     </ul>
   </div>
