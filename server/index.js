@@ -16,6 +16,7 @@ app.get('/api/movies', (req, res) => {
     })
 })
 
+
 app.get('/asdf', (req, res) => {
   res.send('hi there asdf')
 })

@@ -25,7 +25,8 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      movies: []
+      movies: [],
+      emptyMsg: ['none']
     }
     this.searchUpdater = this.searchUpdater.bind(this);
   }
@@ -53,34 +54,45 @@ class App extends React.Component {
           movies: movies.filter((movie) => {
             // console.log(movies);
             // console.log(movie.title.slice(0, searchBarValue.length), 'vs', searchBarValue)
-            if (movie.title.slice(0, searchBarValue.length).toLowerCase() === searchBarValue) {
+            if (movie.title.slice(0, searchBarValue.length).toLowerCase() === searchBarValue.toLowerCase()) {
               return movie.title;
             }
           })
         }
       );
+      console.log(this.state.movies.length)
+      // if (this.state.movies.length === 0) {
+      //   this.setState({
+      //     emptyMsg: [{title: 'none'}]
+      //   })
+      // }
     }
   }
 
-  filterFunc(filterValue) {
-    //set state to equal output of the filter
-
-  }
 
   render() {
-    return (
-      <div>
-        <SearchBar searchUpdater={this.searchUpdater}/>
-        <ul>
-          {/* {console.log('this state:', this.state.movies)} */}
-          {this.state.movies.map((movie, idx) => (
-            <li key={idx}>
-              <Movie movie={movie} />
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
+    if (this.state.movies.length === 0) {
+      return (
+        <div>
+          <SearchBar searchUpdater={this.searchUpdater}/>
+          <span>there are no matching movies</span>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <SearchBar searchUpdater={this.searchUpdater}/>
+          <ul>
+            {/* {console.log('this state:', this.state.movies)} */}
+            {this.state.movies.map((movie, idx) => (
+              <li key={idx}>
+                <Movie movie={movie} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
   }
 }
 
