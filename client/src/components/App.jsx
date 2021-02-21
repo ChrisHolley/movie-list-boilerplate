@@ -1,23 +1,24 @@
 import React from 'react';
 import Movie from './Movie.jsx';
 import SearchBar from './SearchBar.jsx';
+const axios = require('axios');
 
 var movies = [
-  {
-    title: 'Mean Girls',
-  },
-  {
-    title: 'Hackers',
-  },
-  {
-    title: 'Sunshine',
-  },
-  {
-    title: 'Ex Machina',
-  },
-  {
-    title: 'M'
-  }
+  // {
+  //   title: 'Mean Girls',
+  // },
+  // {
+  //   title: 'Hackers',
+  // },
+  // {
+  //   title: 'Sunshine',
+  // },
+  // {
+  //   title: 'Ex Machina',
+  // },
+  // {
+  //   title: 'Machete'
+  // }
 ];
 
 class App extends React.Component {
@@ -30,7 +31,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+
     this.setState({ movies })
+    axios.get('/api/movies')
+      .then((res) => {
+        console.log('get req from api movies', res.data[0])
+        movies = res.data;
+        this.setState( {movies} )
+      })
   }
 
   searchUpdater(searchBarValue) {
@@ -44,14 +52,13 @@ class App extends React.Component {
         {
           movies: movies.filter((movie) => {
             // console.log(movies);
-            // console.log(movie.title, 'vs', searchBarValue)
-            if (movie.title === searchBarValue) {
+            // console.log(movie.title.slice(0, searchBarValue.length), 'vs', searchBarValue)
+            if (movie.title.slice(0, searchBarValue.length).toLowerCase() === searchBarValue) {
               return movie.title;
             }
           })
         }
       );
-
     }
   }
 

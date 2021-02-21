@@ -12,7 +12,7 @@ app.get('/api/movies', (req, res) => {
   Movie.find()
     .then((data) => {
       res.send(data);
-      res.sendStatus(200)
+      res.sendStatus(200);
     })
 })
 
